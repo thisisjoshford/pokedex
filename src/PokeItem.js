@@ -4,7 +4,7 @@ export default class PokeItem extends Component {
 
     render() {
         const pokemonArray = this.props.pokemon
-        const pokemonElements = pokemonArray.map((obj, i) => {
+        const pokemonElements = pokemonArray.map((obj) => {
         return <li className="pokemonContainer" key={obj.id}>
             <div id="pokeImage">
                 <img className="pokeImages" src={obj.url_image} alt={obj.pokemon}/>
