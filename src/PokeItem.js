@@ -11,7 +11,7 @@ export default class PokeItem extends Component {
             </div>
             <div className="labelBox">
                 <h3>{obj.pokemon.toUpperCase()}</h3>
-                <p>Abillity: {obj.ability_1}</p>
+                <p>Ability: {obj.ability_1}</p>
                 <a href={obj.pokedex}>Info</a>
             </div>
         </li>
