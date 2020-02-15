@@ -4,7 +4,7 @@ const URL = "https://alchemy-pokedex.herokuapp.com/api/pokedex?";
 export async function getPokemon() {
   // make a copy of the window url minus the character to the left (# or ?)
   let queryString = window.location.hash.slice(1);
-  // build a NEW url using base URL and concatenating it with the querytString
+  // build a NEW url using base URL and concatenating it with the queryString
   const url = `${URL}${queryString}`;
   // send that url along to the fetch
   const response = await fetch(url);

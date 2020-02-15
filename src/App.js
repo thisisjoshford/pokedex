@@ -12,6 +12,7 @@ export default class App extends Component {
     pokemon: [],
     search: ""
   }
+  
   //getting pokemon from api using getPokemon function... we use async/await because we are working with an api that has delay in returning results
   async loadPokemon() {
     //returns array of objects (count, page, perPage, sort, search, results) results contain array of pokemon objects
@@ -28,6 +29,23 @@ export default class App extends Component {
     }
     )
   }
+
+  runSubmit = event => {
+    event.preventDefault();
+
+    const queryString = window.location.hash.slice(1);
+    //anytime you see something new you are envoking something that takes data and construct new data
+    const searchParams = new URLSearchParams(queryString);
+
+    // searchParams.set("type", formData.get("type"));
+    //
+    searchParams.set("pokemon", this.state.search);
+    //reset to page 1 as this is new search and
+    //we don't know how many pages
+    // searchParams.set("page", 1);
+    window.location.hash = searchParams.toString();
+    console.log(window.location.hash)
+  };
 
   componentDidMount = async() => {
     await this.loadPokemon();
@@ -50,10 +68,11 @@ export default class App extends Component {
      <div>
        <Header/>
        <div className="searchBar">
-         <input placeholder="      search..." value={this.state.search} onChange={this.updateSearch.bind(this)}/>🔍
+         <input placeholder="enter search..." value={this.state.search} onChange={this.updateSearch.bind(this)}/>🔍
+         <button onClick={this.runSubmit}>SUBMIT</button>
        </div>
        <PokeList pokemonz={pokemon}/>
      </div>
    )
  }
-}
+} 
