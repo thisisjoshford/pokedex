@@ -44,6 +44,7 @@ input {
   border: 2px solid black;
   box-shadow: 2px 2px 2px grey;
   border-radius: 3%;
+  margin-right: 10px;
 }
 
 .searchBar {
