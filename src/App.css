@@ -37,6 +37,11 @@
   }
 }
 
+button {
+  cursor: pointer;
+  box-shadow: 2px 2px 2px grey;
+}
+
 input {
   font-size: 16px;
   height:20px;

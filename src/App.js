@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PokeList from './PokeList.js'
 import { getPokemon } from './renderPoke.js'
 import Header from './Header.js'
+import PageNavigation from './PageNavigation.js'
 import './App.css'
 import request from 'superagent';
 import { wait } from '@testing-library/react';
@@ -12,7 +13,7 @@ export default class App extends Component {
     pokemon: [],
     search: ""
   }
-  
+
   //getting pokemon from api using getPokemon function... we use async/await because we are working with an api that has delay in returning results
   async loadPokemon() {
     //returns array of objects (count, page, perPage, sort, search, results) results contain array of pokemon objects
@@ -38,11 +39,9 @@ export default class App extends Component {
     const searchParams = new URLSearchParams(queryString);
 
     // searchParams.set("type", formData.get("type"));
-    //
     searchParams.set("pokemon", this.state.search);
     //reset to page 1 as this is new search and
-    //we don't know how many pages
-    // searchParams.set("page", 1);
+    searchParams.set("page", 1);
     window.location.hash = searchParams.toString();
     console.log(window.location.hash)
   };
@@ -54,6 +53,7 @@ export default class App extends Component {
     })
   }
 
+ 
   //updates the search state based on user input and limits entry to 20 char
   updateSearch(event) {
     this.setState({search: event.target.value.substr(0,20)})
@@ -68,10 +68,12 @@ export default class App extends Component {
      <div>
        <Header/>
        <div className="searchBar">
-         <input placeholder="enter search..." value={this.state.search} onChange={this.updateSearch.bind(this)}/>🔍
-         <button onClick={this.runSubmit}>SUBMIT</button>
+         <input placeholder="enter search..." value={this.state.search} onChange={this.updateSearch.bind(this)}/>
+         <button onClick={this.runSubmit}>🔍</button>
        </div>
        <PokeList pokemonz={pokemon}/>
+       <PageNavigation totalResults={numberOfPokemon}/>
+       
      </div>
    )
  }
