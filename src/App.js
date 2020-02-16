@@ -11,7 +11,9 @@ export default class App extends Component {
   //create empty containers (variables) in state
   state = {
     pokemon: [],
-    search: ""
+    search: "",
+    ability_1:"",
+    type_1:""
   }
 
   //getting pokemon from api using getPokemon function... we use async/await because we are working with an api that has delay in returning results
@@ -35,12 +37,13 @@ export default class App extends Component {
     event.preventDefault();
 
     const queryString = window.location.hash.slice(1);
-    //anytime you see something new you are envoking something that takes data and construct new data
+    //anytime you see something new you are evoking something that takes data and construct new data
     const searchParams = new URLSearchParams(queryString);
 
     // searchParams.set("type", formData.get("type"));
     searchParams.set("pokemon", this.state.search);
-    //reset to page 1 as this is new search and
+    searchParams.set("ability_1", this.state.ability_1);
+    searchParams.set("type_1", this.state.type_1);
     searchParams.set("page", 1);
     window.location.hash = searchParams.toString();
     console.log(window.location.hash)
@@ -53,11 +56,18 @@ export default class App extends Component {
     })
   }
 
- 
   //updates the search state based on user input and limits entry to 20 char
   updateSearch(event) {
     this.setState({search: event.target.value.substr(0,20)})
     console.log(this.state.search)
+  }
+  updateAbility(event) {
+    this.setState({ability_1: event.target.value.substr(0,20)})
+    console.log(this.state.ability_1)
+  }
+  updateType(event) {
+    this.setState({type_1: event.target.value.substr(0,20)})
+    console.log(this.state.type_1)
   }
   
   render(){
@@ -68,7 +78,9 @@ export default class App extends Component {
      <div>
        <Header/>
        <div className="searchBar">
-         <input placeholder="enter search..." value={this.state.search} onChange={this.updateSearch.bind(this)}/>
+         <input placeholder="name search..." value={this.state.search} onChange={this.updateSearch.bind(this)}/>
+         <input placeholder="ability search..." value={this.state.ability_1} onChange={this.updateAbility.bind(this)}/>
+         <input placeholder="type search..." value={this.state.type_1} onChange={this.updateType.bind(this)}/>
          <button onClick={this.runSubmit}>🔍</button>
        </div>
        <PokeList pokemonz={pokemon}/>
