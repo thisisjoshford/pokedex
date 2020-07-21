@@ -36,3 +36,23 @@
     transform: rotate(360deg);
   }
 }
+
+button {
+  cursor: pointer;
+  box-shadow: 2px 2px 2px grey;
+}
+
+input {
+  font-size: 16px;
+  height:20px;
+  width:100px;
+  border: 2px solid black;
+  box-shadow: 2px 2px 2px grey;
+  border-radius: 3%;
+  margin-right: 10px;
+}
+
+.searchBar {
+  text-align: center;
+}
+
